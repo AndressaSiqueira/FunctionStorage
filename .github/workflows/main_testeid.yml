@@ -29,8 +29,8 @@ jobs:
         run: |
           mkdir -p build
           pip install -r requirements.txt -t build/
-          cp -r * build/
-          cp -r .[^.]* build/ || true  # copia arquivos ocultos (ex: .funcignore), ignora erros
+          shopt -s extglob dotglob
+          cp -r !(build) build/
         shell: bash
 
       - name: Zip the build output
